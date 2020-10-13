@@ -2,26 +2,33 @@ console.log('app is loading ...');
 const chalk = require('chalk')
 const axios = require('axios');
 const shelljs = require('shelljs');
-const reposChunk = 100;
+const userName = "NathanKr";
 
 let repos = [];
 
+async function getPublicReposNum(){
+    const baseUrlApi = `https://api.github.com/users/${userName}`
+    const res = await axios.get(baseUrlApi);
+    return res.data.public_repos;
+}
+
 async function getPublicRepos () {
-    const baseUrlApi = "https://api.github.com/users/nathankr";
-    const url = `${baseUrlApi}/repos?per_page=${reposChunk}`;
+    const numRepos = await getPublicReposNum();
+    const baseUrlApi = `https://api.github.com/users/${userName}`;
+    const url = `${baseUrlApi}/repos?per_page=${numRepos}`;
 
     const res = await axios.get(url);
     repos = res.data;
-    console.log(chalk.yellow(`number of public repos : ${repos.length} , chunk : ${reposChunk}`))
+    console.log(chalk.yellow(`number of public repos : ${repos.length}`))
     for (let index = 0; index < repos.length; index++) {
         const repo = repos[index];
-        console.log(repo.name)
+        console.log(`${index+1} : repo.name`)
     }
 }
 
 function cloneRepos(){
     repos.forEach(repo => {
-        const baseUrl = "https://github.com/NathanKr";
+        const baseUrl = `https://github.com/${userName}`;
         const repoUrl = `${baseUrl}/${repo.name}`;
         const res = shelljs.exec(`git clone ${repoUrl}`)
         if(res.code == 0 ){
@@ -34,7 +41,7 @@ function cloneRepos(){
 }
 
 async function run(){
-    console.log(chalk.red('private repos are not yet handled - todo!!!'))
+    console.log('public repos')
     await getPublicRepos();
     cloneRepos();
 }
