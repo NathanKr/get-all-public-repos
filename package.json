@@ -1,0 +1,25 @@
+{
+  "name": "get-all-repos",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NathanKr/get-all-repos.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/NathanKr/get-all-repos/issues"
+  },
+  "homepage": "https://github.com/NathanKr/get-all-repos#readme",
+  "dependencies": {
+    "axios": "^0.20.0",
+    "chalk": "^4.1.0",
+    "shelljs": "^0.8.4"
+  }
+}
