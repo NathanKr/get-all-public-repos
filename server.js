@@ -40,7 +40,7 @@ async function getPublicRepos () {
     console.log(chalk.yellow(`number of public repos : ${repos.length}`))
     for (let index = 0; index < repos.length; index++) {
         const repo = repos[index];
-        console.log(`${index+1} : repo.name`)
+        console.log(`${index+1} : ${repo.name}`)
     }
 }
 
@@ -60,11 +60,11 @@ async function  cloneRepos(){
 }
 
 async function run(){
+    console.log('public repos')
+    await getPublicRepos();
+    createOutputDirIfNotExist();
+    cloneRepos();
     await zip(outputDir, archiveZipFileName);
-    // console.log('public repos')
-    // await getPublicRepos();
-    // createOutputDirIfNotExist();
-    // cloneRepos();
 }
 
 run();
