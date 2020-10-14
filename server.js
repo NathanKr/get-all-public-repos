@@ -6,10 +6,14 @@ const fs = require('fs');
 const path = require('path');
 const { zip } = require('zip-a-folder');
 
+function getTimeStamp(){
+const date = new Date();
+return `${date.getDate()}_${date.getMonth()+1}_${date.getFullYear()}`;
+}
 
 const userName = process.argv[2];
 const outputDir = process.argv[3] ? process.argv[3] : "clonedRepos";
-const archiveZipFileName = "archive.zip";
+const archiveZipFileName = `archive_${userName}_${getTimeStamp()}.zip`;
 
 if(!userName){
     console.error(chalk.red('Error : user name must be defined'));

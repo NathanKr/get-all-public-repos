@@ -19,12 +19,12 @@ npm i
 node server.js NathanKr OutDir 
 
 above will go over all public repo of https://github.com/NathanKr and will clone them into the directory OutDir. 
-archive.zip will be created on the same directory as the node application
+zip file will be created on the same directory as the node application
 
 2.
 node server.js NathanKr  
 above will go over all public repo of https://github.com/NathanKr and will clone them into the directory clonedRepos. 
-archive.zip will be created on the same directory as the node application
+zip file will be created on the same directory as the node application
 
 
 <h2>Limitation</h2>
