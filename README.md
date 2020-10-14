@@ -1,14 +1,14 @@
 <h2>Motiviation</h2>
 Github is great , but what happens if you :
 <ul>
-<li>accidently deleted a repo</li>
-<li>not able to login into github</li>
-<li>sure only at 99.99% that github handles your repos correctly</li>
+<li>accidentally deleted a repo</li>
+<li>not able to login into Github</li>
+<li>sure only at 99.99% that github handles your repositories correctly</li>
 </ul>
 
 <h2>Solution</h2>
-build a node app that go over repos and clone on your disk
-The result is a directory with all cloned repos and archive.zip
+build a node app that goes over repositories and clone on your disk
+The result is a directory with all cloned repositories and archive.zip
 
 <h2>Installation</h2>
 npm i
@@ -28,5 +28,5 @@ archive.zip will be created on the same directory as the node application
 
 
 <h2>Limitation</h2>
-only public repos are cloned
+only public repositories are cloned
 
