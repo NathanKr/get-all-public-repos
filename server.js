@@ -2,9 +2,27 @@ console.log('app is loading ...');
 const chalk = require('chalk')
 const axios = require('axios');
 const shelljs = require('shelljs');
-const userName = "NathanKr";
+const fs = require('fs');
+const path = require('path');
+const { zip } = require('zip-a-folder');
+
+
+const userName = process.argv[2];
+const outputDir = process.argv[3] ? process.argv[3] : "clonedRepos";
+const archiveZipFileName = "archive.zip";
+
+if(!userName){
+    console.error(chalk.red('Error : user name must be defined'));
+    return;
+}
 
 let repos = [];
+
+function createOutputDirIfNotExist(){
+    if (!fs.existsSync(outputDir)){
+        fs.mkdirSync(outputDir);
+    }
+}
 
 async function getPublicReposNum(){
     const baseUrlApi = `https://api.github.com/users/${userName}`
@@ -26,11 +44,11 @@ async function getPublicRepos () {
     }
 }
 
-function cloneRepos(){
+async function  cloneRepos(){
     repos.forEach(repo => {
         const baseUrl = `https://github.com/${userName}`;
         const repoUrl = `${baseUrl}/${repo.name}`;
-        const res = shelljs.exec(`git clone ${repoUrl}`)
+        const res = shelljs.exec(`git -C ${outputDir} clone ${repoUrl} `)
         if(res.code == 0 ){
             console.log(chalk.green(`success clone of ${repo.name}`));
         }
@@ -38,12 +56,15 @@ function cloneRepos(){
             console.error(chalk.red(`failure clone of ${repo.name}`));
         }
  });
+ await zip(outputDir, archiveZipFileName);
 }
 
 async function run(){
-    console.log('public repos')
-    await getPublicRepos();
-    cloneRepos();
+    await zip(outputDir, archiveZipFileName);
+    // console.log('public repos')
+    // await getPublicRepos();
+    // createOutputDirIfNotExist();
+    // cloneRepos();
 }
 
 run();
